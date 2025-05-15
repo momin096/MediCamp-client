@@ -6,47 +6,71 @@ import { imageUpload } from "../../api/utlities";
 import useAuth from "../../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
-
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
-    const { createUser, updateUserProfile, signInWithGoogle } = useAuth()
-    const navigate = useNavigate()
-
+    const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit = async (data) => {
-        const { name, email, password, profilePicture } = data || {}
-        const imageFile = profilePicture[0]
-
-        // upload image to imgbb
-        const photoURL = await imageUpload(imageFile)
+        const { name, email, password, profilePicture } = data;
+        const imageFile = profilePicture[0];
 
         try {
-            const result = await createUser(email, password)
+            // Upload image to imgbb
+            const photoURL = await imageUpload(imageFile);
 
-            await updateUserProfile(name, photoURL)
+            // Create user with email/password
+            const result = await createUser(email, password);
+            if (result?.user) {
+                await updateUserProfile(name, photoURL);
 
-            console.log(result);
+                // Save user to database
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name,
+                    email,
+                    image: photoURL
+                });
+
+                if (res.data.insertedId) {
+                    toast.success("User profile created successfully!");
+                }
+                navigate('/');
+            }
         } catch (err) {
-            console.log(err);
+            console.error(err);
+            toast.error("Registration failed!");
         }
-
-    }
+    };
 
     const handleGoogleSignIn = async () => {
         try {
-            const data = await signInWithGoogle()
-            if (data?.user) {
-                navigate('/')
-                toast.success('Signup Successful')
+            const result = await signInWithGoogle();
+            if (result?.user) {
+                const { displayName, email, photoURL } = result.user;
+
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name: displayName,
+                    email,
+                    image: photoURL
+                });
+
+                if (res.data.insertedId) {
+                    toast.success("User profile created successfully!");
+                    toast.success("SignIn successful!");
+                }
+
+                navigate('/');
             }
         } catch (err) {
-            console.log(err)
-            toast.error(err?.message)
+            console.error(err);
+            toast.error("Google Sign-In failed!");
         }
-    }
+    };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -61,7 +85,7 @@ const Register = () => {
                 <h2 className="text-2xl font-bold text-center text-green-600">Create a New Account</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {/* Name Input */}
+                    {/* Name */}
                     <div>
                         <label className="label">
                             <span className="text-base label-text">Full Name</span>
@@ -75,7 +99,7 @@ const Register = () => {
                         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                     </div>
 
-                    {/* Email Input */}
+                    {/* Email */}
                     <div>
                         <label className="label">
                             <span className="text-base label-text">Email</span>
@@ -89,7 +113,7 @@ const Register = () => {
                         {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                     </div>
 
-                    {/* Password Input */}
+                    {/* Password */}
                     <div>
                         <label className="label">
                             <span className="text-base label-text">Password</span>
@@ -99,17 +123,16 @@ const Register = () => {
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter password"
                                 className="input input-bordered w-full"
-                                {...register("password", { required: "Password is required" })}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: { value: 6, message: "Password must be at least 6 characters" }
+                                })}
                             />
                             <span
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
-                                {showPassword ? (
-                                    <FaEye className="text-xl" />
-                                ) : (
-                                    <FaEyeSlash className="text-xl" />
-                                )}
+                                {showPassword ? <FaEye className="text-xl" /> : <FaEyeSlash className="text-xl" />}
                             </span>
                         </div>
                         {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
@@ -139,13 +162,14 @@ const Register = () => {
                         Register
                     </button>
                 </form>
+
                 <div className="divider">OR</div>
 
                 <button
                     onClick={handleGoogleSignIn}
-                    className="border py-2 rounded-sm bg-green-100  border-gray-200 hover:bg-green-200/80 font-bold w-full flex items-center gap-2 justify-center">
+                    className="border py-2 rounded-sm bg-green-100 border-gray-200 hover:bg-green-200/80 font-bold w-full flex items-center gap-2 justify-center"
+                >
                     <FcGoogle className="text-xl" />
-
                     Continue with Google
                 </button>
 

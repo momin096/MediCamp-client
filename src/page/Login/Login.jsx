@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 
@@ -16,6 +17,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { signIn, signInWithGoogle } = useAuth()
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
 
 
     const onSubmit = async (data) => {
@@ -37,8 +39,19 @@ const Login = () => {
         try {
             const data = await signInWithGoogle()
             if (data?.user) {
+                const { displayName, email, photoURL } = data?.user || {}
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name: displayName,
+                    email,
+                    image: photoURL
+                });
+
+                if (res.data.insertedId) {
+                    toast.success("User profile created successfully!");
+                    toast.success("SignIn successful!");
+                }
+
                 navigate('/')
-                toast.success('Signup Successful')
             }
         } catch (err) {
             console.log(err)

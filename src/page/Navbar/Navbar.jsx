@@ -20,8 +20,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="navbar bg-base-100 shadow-md fixed top-0 z-50">
-            {/* Left - Mobile menu button */}
+        <div className="navbar bg-gradient-to-r from-[#d4e2f1] via-[#8fb3b7] to-[#99c39b]  fixed top-0 z-50 ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost md:hidden">
@@ -32,7 +31,7 @@ const Navbar = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {navLinks}
                         {!user ? (
-                            <li><NavLink to="/join-us" className="text-green-600 font-semibold">Join Us</NavLink></li>
+                            <li><NavLink to="/login" className="text-green-600 font-semibold">Join Us</NavLink></li>
                         ) : (
                             <li>
                                 <details>
@@ -55,14 +54,12 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Center - Desktop nav */}
             <div className="navbar-center hidden md:flex">
                 <ul className="menu menu-horizontal px-1">
                     {navLinks}
                 </ul>
             </div>
 
-            {/* Right - Auth/Profile */}
             <div className="navbar-end flex items-center md:gap-2">
                 {!user ? (
                     <Link to="/login" className="btn btn-sm bg-green-600 text-white hover:bg-green-700">Join Us</Link>
@@ -70,7 +67,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src={user?.photoURL || "/default-profile.png"} alt="profile" />
+                                <img referrerPolicy='no-referrer' src={user?.photoURL || "/default-profile.png"} alt="profile" />
                             </div>
                         </div>
                         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-48 ">
