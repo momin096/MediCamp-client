@@ -24,6 +24,7 @@ const Register = () => {
             // Upload image to imgbb
             const photoURL = await imageUpload(imageFile);
 
+            
             // Create user with email/password
             const result = await createUser(email, password);
             if (result?.user) {

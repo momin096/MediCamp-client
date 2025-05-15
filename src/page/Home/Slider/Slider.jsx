@@ -21,7 +21,7 @@ const Slider = () => {
             mousewheel={true}
             keyboard={true}
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            className="mySwiper h-[90vh]"
+            className="mySwiper h-screen"
         >
             {/* Slide 1 */}
             <SwiperSlide>

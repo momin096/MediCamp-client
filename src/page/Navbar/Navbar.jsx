@@ -30,22 +30,7 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {navLinks}
-                        {!user ? (
-                            <li><NavLink to="/login" className="text-green-600 font-semibold">Join Us</NavLink></li>
-                        ) : (
-                            <li>
-                                <details>
-                                    <summary className="flex items-center gap-2">
-                                        <img src={user?.photoURL || "/default-profile.png"} className="w-6 h-6 rounded-full" alt="user" />
-                                        {user.displayName}
-                                    </summary>
-                                    <ul>
-                                        <li><Link to="/dashboard">Dashboard</Link></li>
-                                        <li><button onClick={handleLogout}>Logout</button></li>
-                                    </ul>
-                                </details>
-                            </li>
-                        )}
+                        
                     </ul>
                 </div>
                 <Link to="/" className="text-xl text-green-600 font-bold flex items-center gap-2">

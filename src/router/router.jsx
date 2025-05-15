@@ -3,6 +3,8 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../page/Home/Home";
 import Login from "../page/Login/Login";
 import Register from "../page/Register/Register";
+import Dashboard from "../page/Dashboard/Dashboard";
+import AddCamp from "../page/Dashboard/AddCamp/AddCamp";
 
 
 const router = createBrowserRouter([
@@ -23,6 +25,16 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard />,
+        children: [
+            {
+                index: true,
+                element: <AddCamp />
+            }
+        ]
     }
 ]);
 
