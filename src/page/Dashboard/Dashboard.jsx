@@ -95,7 +95,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard"
+                                to="/dashboard/add-camp"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
@@ -107,7 +107,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard/payment-history"
+                                to="/dashboard/manage-camps"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"

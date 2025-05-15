@@ -43,6 +43,9 @@ const AddCamp = () => {
                 console.log(image);
                 const { data } = await axiosSecure.post('/camps', campDetails)
                 console.log(data);
+                if(data.insertedId){
+                    toast.success('Camp Added!!')
+                }
             }
 
         } catch (err) {
