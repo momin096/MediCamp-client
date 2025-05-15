@@ -7,6 +7,8 @@ import Dashboard from "../page/Dashboard/Dashboard";
 import AddCamp from "../page/Dashboard/AddCamp/AddCamp";
 import ManageCamp from "../page/Dashboard/ManageCamp/ManageCamp";
 import UpdateCamp from "../page/Dashboard/ManageCamp/UpdateCamp";
+import OrganizerProfile from "../page/Dashboard/OrganizerProfile/OrganizerProfile";
+import ParticipantProfile from "../page/Dashboard/ParticipantProfile/ParticipantProfile";
 
 
 const router = createBrowserRouter([
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         children: [
             {
-                path: '/dashboard/add-camp',
+                path: 'add-camp',
                 element: <AddCamp />
             },
             {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
             {
                 path: 'update-camp/:id',
                 element: <UpdateCamp />
+            },
+            {
+                path: 'organizer-profile',
+                element: <OrganizerProfile />
+            },
+            {
+                path: 'participant-profile',
+                element: <ParticipantProfile />
             },
         ]
     }

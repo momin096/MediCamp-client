@@ -3,10 +3,11 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loading from "../../../components/Loading/Loading";
 
 const ManageCamp = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: camps = [], refetch } = useQuery({
+    const { data: camps = [], refetch, isLoading } = useQuery({
         queryKey: ['camps'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/camps`)
@@ -42,6 +43,7 @@ const ManageCamp = () => {
 
     }
 
+    if (isLoading) return <Loading />
 
 
     return (

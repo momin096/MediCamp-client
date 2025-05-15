@@ -40,11 +40,11 @@ const AddCamp = () => {
                     participants: 0,
                 }
 
-                console.log(image);
                 const { data } = await axiosSecure.post('/camps', campDetails)
                 console.log(data);
                 if (data.insertedId) {
                     toast.success('Camp Added!!')
+                    reset()
                 }
             }
 
@@ -77,7 +77,7 @@ const AddCamp = () => {
                     />
                     {imagePreview && (
                         <div className="mt-2 text-center">
-                            <img src={imagePreview} alt="Preview" className="w-full max-h-96 object-cover rounded-lg" />
+                            <img src={imagePreview} alt="Preview" className="w-full   rounded-lg" />
                         </div>
                     )}
                     {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
