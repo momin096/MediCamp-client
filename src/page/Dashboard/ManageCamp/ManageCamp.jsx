@@ -3,16 +3,45 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageCamp = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: camps = [] } = useQuery({
+    const { data: camps = [], refetch } = useQuery({
         queryKey: ['camps'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/camps`)
             return data
         }
     })
+
+
+    const handleDelete = async (camp) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You want to delete ${camp.campName} ?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const { data } = await axiosSecure.delete(`/camps/${camp._id}`)
+                if (data.deletedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+
+
+            }
+        });
+
+    }
 
 
 
@@ -45,7 +74,9 @@ const ManageCamp = () => {
                                         <button className="text-green-500 hover:text-green-700 transition">
                                             <FaEdit size={22} />
                                         </button>
-                                        <button className="text-red-500 hover:text-red-700 transition">
+                                        <button
+                                            onClick={() => handleDelete(camp)}
+                                            className="text-red-500 hover:text-red-700 transition">
                                             <FaTrash size={22} />
                                         </button>
                                     </td>
