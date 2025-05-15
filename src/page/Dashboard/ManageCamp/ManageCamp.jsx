@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -64,16 +63,16 @@ const ManageCamp = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {camps.map((camp) => (
+                            {[...camps].reverse().map((camp) => (
                                 <tr key={camp._id} className="border-t border-gray-400 hover:bg-gray-50/80 transition">
                                     <td className="px-6 py-4">{camp.campName}</td>
                                     <td className="px-6 py-4">{camp.dateTime}</td>
                                     <td className="px-6 py-4">{camp.location}</td>
                                     <td className="px-6 py-4">{camp.healthCare}</td>
-                                    <td className="px-6 py-4 text-center space-x-4">
-                                        <button className="text-green-500 hover:text-green-700 transition">
+                                    <td className="px-6 py-4 text-center space-x-4 flex items-center">
+                                        <Link to={`/dashboard/update-camp/${camp._id}`} className="text-green-500 hover:text-green-700 transition">
                                             <FaEdit size={22} />
-                                        </button>
+                                        </Link>
                                         <button
                                             onClick={() => handleDelete(camp)}
                                             className="text-red-500 hover:text-red-700 transition">

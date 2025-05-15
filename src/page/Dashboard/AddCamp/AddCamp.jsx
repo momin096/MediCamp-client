@@ -43,7 +43,7 @@ const AddCamp = () => {
                 console.log(image);
                 const { data } = await axiosSecure.post('/camps', campDetails)
                 console.log(data);
-                if(data.insertedId){
+                if (data.insertedId) {
                     toast.success('Camp Added!!')
                 }
             }
@@ -107,10 +107,7 @@ const AddCamp = () => {
                     ></textarea>
                     {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
 
-                    
-                    <button type="submit" className="btn w-full bg-green-600 text-white hover:bg-green-700">
-                        Submit Camp
-                    </button>
+                    <input type="submit" className="btn w-full bg-green-600 text-white hover:bg-green-700" value={'Add Camp'} />
                 </form>
             </div>
         </div>
