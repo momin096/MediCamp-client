@@ -1,8 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { FaHome, FaCampground, FaChartBar, FaUser, FaClipboardList, FaCreditCard } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
+    const { user } = useAuth()
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -56,7 +58,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard/registered-camps"
+                                to={`/dashboard/`}
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
@@ -119,7 +121,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard/payment-history"
+                                to="/dashboard/registered-camps"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"

@@ -11,6 +11,8 @@ import UpdateProfile from "../page/Dashboard/UpdateProfile/UpdateProfile";
 import Profile from "../page/Dashboard/Profile/Profile";
 import AvailableCamp from "../page/AvailableCamp/AvailableCamp";
 import CampDetails from "../page/CampDetails/CampDetails";
+import MyRegisteredCamp from "../page/Dashboard/MyRegisteredCamp/MyRegisteredCamp";
+import AllRegisteredCamps from "../page/Dashboard/AllRegisteredCamps/AllRegisteredCamps";
 
 
 const router = createBrowserRouter([
@@ -64,6 +66,11 @@ const router = createBrowserRouter([
             {
                 path: 'update-profile/:email',
                 element: <UpdateProfile />
+            },
+            {
+                path: 'registered-camps',
+                element: <AllRegisteredCamps />
+
             },
         ]
     }
