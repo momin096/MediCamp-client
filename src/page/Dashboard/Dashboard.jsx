@@ -44,7 +44,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard/participant-profile"
+                                to="/dashboard/profile"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
@@ -83,7 +83,7 @@ const Dashboard = () => {
                         <div className="my-4 border-t border-[#1F1F1F]/30"></div>
                         <li>
                             <NavLink
-                                to="/dashboard/organizer-profile"
+                                to="/dashboard/profile"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"

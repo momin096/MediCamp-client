@@ -7,8 +7,8 @@ import Dashboard from "../page/Dashboard/Dashboard";
 import AddCamp from "../page/Dashboard/AddCamp/AddCamp";
 import ManageCamp from "../page/Dashboard/ManageCamp/ManageCamp";
 import UpdateCamp from "../page/Dashboard/ManageCamp/UpdateCamp";
-import OrganizerProfile from "../page/Dashboard/OrganizerProfile/OrganizerProfile";
-import ParticipantProfile from "../page/Dashboard/ParticipantProfile/ParticipantProfile";
+import UpdateProfile from "../page/Dashboard/UpdateProfile/UpdateProfile";
+import Profile from "../page/Dashboard/Profile/Profile";
 
 
 const router = createBrowserRouter([
@@ -47,12 +47,13 @@ const router = createBrowserRouter([
                 element: <UpdateCamp />
             },
             {
-                path: 'organizer-profile',
-                element: <OrganizerProfile />
+                path: 'profile',
+                element: <Profile />
             },
+
             {
-                path: 'participant-profile',
-                element: <ParticipantProfile />
+                path: 'update-profile/:email',
+                element: <UpdateProfile />
             },
         ]
     }

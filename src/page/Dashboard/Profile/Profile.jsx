@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
-const OrganizerProfile = () => {
+const Profile = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const { data: userData } = useQuery({
@@ -29,7 +30,7 @@ const OrganizerProfile = () => {
                     <p className="bg-green-200 px-3 py-1 font-bold rounded-lg text-gray-500 mt-2">{role}</p>
                     <h2 className="text-2xl font-bold mt-4">{name}</h2>
                     <p className="text-gray-600">{email}</p>
-                    <button className="btn btn-info text-white mt-5">Update Profile</button>
+                    <Link to={`/dashboard/update-profile/${email}`} className="btn btn-info text-white mt-5">Update Profile</Link>
                 </div>
 
 
@@ -38,4 +39,4 @@ const OrganizerProfile = () => {
     );
 };
 
-export default OrganizerProfile;
+export default Profile;
