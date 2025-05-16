@@ -9,6 +9,8 @@ import ManageCamp from "../page/Dashboard/ManageCamp/ManageCamp";
 import UpdateCamp from "../page/Dashboard/ManageCamp/UpdateCamp";
 import UpdateProfile from "../page/Dashboard/UpdateProfile/UpdateProfile";
 import Profile from "../page/Dashboard/Profile/Profile";
+import AvailableCamp from "../page/AvailableCamp/AvailableCamp";
+import CampDetails from "../page/CampDetails/CampDetails";
 
 
 const router = createBrowserRouter([
@@ -19,7 +21,15 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
-            }
+            },
+            {
+                path: '/available-camp',
+                element: <AvailableCamp />
+            },
+            {
+                path: '/camp-details/:id',
+                element: <CampDetails />
+            },
         ]
     },
     {
