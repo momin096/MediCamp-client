@@ -56,6 +56,18 @@ const MyRegisteredCamp = () => {
         refetch();
     };
 
+    const handleAddPaymentInfo = async (txid) => {
+        const { data } = await axiosSecure.post('/payments', {
+            name: selectedCamp?.participantName,
+            email: selectedCamp?.participantEmail,
+            transactionId: txid,
+            price: selectedCamp?.campFees,
+        })
+        if (data.insertedId) {
+            toast.success('Payment info Updated')
+        }
+    }
+
     if (isLoading) return <Loading />;
 
     return (
@@ -165,6 +177,7 @@ const MyRegisteredCamp = () => {
                                             handlePayNow={handlePayNow}
                                             setIsOpen={setIsOpen}
                                             camp={selectedCamp?.campFees}
+                                            handleAddPaymentInfo={handleAddPaymentInfo}
                                         />
                                     </Elements>
 

@@ -3,7 +3,7 @@ import './CheckoutForm.css';
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const CheckoutForm = ({ handlePayNow, setIsOpen, camp }) => {
+const CheckoutForm = ({ handlePayNow, setIsOpen, handleAddPaymentInfo, camp }) => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
@@ -41,7 +41,7 @@ const CheckoutForm = ({ handlePayNow, setIsOpen, camp }) => {
         const card = elements.getElement(CardElement);
         if (!card) return;
 
-        const { error: methodError, paymentMethod } = await stripe.createPaymentMethod({
+        const { error: methodError, } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -61,6 +61,7 @@ const CheckoutForm = ({ handlePayNow, setIsOpen, camp }) => {
                 },
             },
         });
+        console.log(paymentIntent);
 
         if (confirmError) {
             setPaymentError(confirmError.message);
@@ -68,8 +69,9 @@ const CheckoutForm = ({ handlePayNow, setIsOpen, camp }) => {
         } else if (paymentIntent.status === 'succeeded') {
             setPaymentSuccess('Payment successful!');
             setPaymentError('');
-            handlePayNow(); // Call your custom handler
-            setIsOpen(false); // Close modal
+            handlePayNow();
+            setIsOpen(false);
+            handleAddPaymentInfo(paymentIntent.id)
         }
     };
 
