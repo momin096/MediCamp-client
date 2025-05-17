@@ -37,6 +37,7 @@ const CampDetails = () => {
             participantName: user.displayName,
             participantEmail: user.email,
             payment: 'Unpaid',
+            status: 'Pending',
             ...formData,
         };
 
@@ -120,7 +121,7 @@ const CampDetails = () => {
                             </select>
                             {errors.gender && <p className="text-red-500 text-sm">Gender is required</p>}
 
-                            <input type="text" placeholder="Emergency Contact" {...register("emergencyContact", { required: true })} className="input input-bordered w-full" />
+                            <input type="number" placeholder="Emergency Contact" {...register("emergencyContact", { required: true })} className="input input-bordered w-full" />
                             {errors.emergencyContact && <p className="text-red-500 text-sm">Emergency contact is required</p>}
 
                             <input type="submit" className="btn btn-success w-full text-white" value="Confirm Registration" />

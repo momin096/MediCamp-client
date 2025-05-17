@@ -72,6 +72,11 @@ const router = createBrowserRouter([
                 element: <AllRegisteredCamps />
 
             },
+            {
+                path: 'my-registered-camps',
+                element: <MyRegisteredCamp />
+
+            },
         ]
     }
 ]);
