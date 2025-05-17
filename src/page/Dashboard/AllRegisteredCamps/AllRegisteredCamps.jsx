@@ -81,7 +81,7 @@ const AllRegisteredCamps = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className="h-screen flex items-center w-full justify-center bg-gray-500">
+        <div className="h-screen flex items-center w-full justify-center bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 ">
             <div className="overflow-x-auto p-4 bg-gray-900 rounded-lg">
                 <table className="min-w-full text-sm text-left text-white border border-gray-700">
                     <thead className="bg-gray-800 text-white uppercase">

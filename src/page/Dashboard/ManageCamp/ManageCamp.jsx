@@ -47,7 +47,7 @@ const ManageCamp = () => {
 
 
     return (
-        <div>
+        <div className="bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 h-screen">
             <div className="p-4">
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-6">
                     Manage Camps
