@@ -15,7 +15,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { signIn, signInWithGoogle } = useAuth()
+    const { signIn, signInWithGoogle, setLoading } = useAuth()
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
@@ -31,6 +31,8 @@ const Login = () => {
             }
         } catch (err) {
             console.log(err);
+            setLoading(false)
+            toast.error(err)
         }
 
     };

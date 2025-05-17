@@ -21,7 +21,7 @@ const Slider = () => {
             mousewheel={true}
             keyboard={true}
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            className="mySwiper h-screen"
+            className="mySwiper lg:h-screen"
         >
             {/* Slide 1 */}
             <SwiperSlide>
@@ -31,8 +31,8 @@ const Slider = () => {
                         <p className="text-lg text-gray-800">
                             Our mobile medical camps brought healthcare to remote villages, impacting over 1,200 lives in just one week.
                         </p>
-                        <Link to="/camps" className="inline-block bg-[#2e7d32] text-white px-6 py-3 rounded-xl hover:bg-[#1b5e20] transition">
-                            View Camp Stories
+                        <Link to="/available-camp" className="inline-block bg-[#2e7d32] text-white px-6 py-3 rounded-xl hover:bg-[#1b5e20] transition">
+                            View Camp
                         </Link>
                     </div>
                     <div className="lg:w-1/2 flex justify-center">
@@ -49,8 +49,8 @@ const Slider = () => {
                         <p className="text-lg text-gray-800">
                             Children received dental care for the first time in their lives, thanks to our dedicated volunteer dentists.
                         </p>
-                        <Link to="/impact" className="inline-block bg-[#1565c0] text-white px-6 py-3 rounded-xl hover:bg-[#0d47a1] transition">
-                            Explore Impact
+                        <Link to="/available-camp" className="inline-block bg-[#1565c0] text-white px-6 py-3 rounded-xl hover:bg-[#0d47a1] transition">
+                            Explore Camps
                         </Link>
                     </div>
                     <div className="lg:w-1/2 flex justify-center">
@@ -67,8 +67,8 @@ const Slider = () => {
                         <p className="text-lg text-gray-800">
                             Volunteers, donors, and doctors came together to create lasting change through coordinated medical efforts.
                         </p>
-                        <Link to="/volunteers" className="inline-block bg-[#f57c00] text-white px-6 py-3 rounded-xl hover:bg-[#e65100] transition">
-                            Meet Our Heroes
+                        <Link to="/available-camp" className="inline-block bg-[#f57c00] text-white px-6 py-3 rounded-xl hover:bg-[#e65100] transition">
+                            See Camps
                         </Link>
                     </div>
                     <div className="lg:w-1/2 flex justify-center">

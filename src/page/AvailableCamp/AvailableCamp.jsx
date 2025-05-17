@@ -109,7 +109,7 @@ const AvailableCamp = () => {
             No camps found matching your criteria.
           </p>
         ) : (
-          sortedCamps.map((camp) => (
+          [...sortedCamps].reverse().map((camp) => (
             <div
               key={camp._id}
               className="card bg-white shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-2xl overflow-hidden"

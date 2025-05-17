@@ -30,7 +30,7 @@ const Dashboard = () => {
                     <ul className="menu p-6 w-72 min-h-full bg-gradient-to-b from-[#D9AFD9] to-[#97D9E1] text-[#1F1F1F] font-medium">
                         <Link to={'/'} className="text-2xl font-extrabold mb-6 tracking-wide flex items-center gap-2">
                             <img className="h-8 w-8" src="/Logo.png" alt="" />
-                            MCMS</Link>
+                            MediCamp</Link>
 
                         <li>
                             <NavLink
@@ -149,7 +149,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/available-camps"
+                                to="/available-camp"
                                 className={({ isActive }) =>
                                     isActive
                                         ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"

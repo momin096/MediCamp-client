@@ -46,8 +46,6 @@ const AllRegisteredCamps = () => {
 
 
     const changeStatus = async (camp) => {
-
-
         Swal.fire({
             title: "Are you sure?",
             text: `Do you want to confirm ${camp.campName}?`,
@@ -95,7 +93,7 @@ const AllRegisteredCamps = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {camps.map((p, i) => (
+                        {[...camps].reverse().map((p, i) => (
                             <tr key={i} className="bg-gray-800 hover:bg-gray-700">
                                 <td className="px-4 py-2 border border-gray-700">{p.participantName}</td>
                                 <td className="px-4 py-2 border border-gray-700">{p.campName}</td>
@@ -104,7 +102,7 @@ const AllRegisteredCamps = () => {
                                 <td className="px-4 py-2 border border-gray-700">{p.status}</td>
                                 <td className="px-4 py-2 border border-gray-700 text-center">
                                     <div className="flex gap-5">
-                                        <button disabled={p.status === 'Confirmed' && p.payment === 'Paid'} onClick={() => changeStatus(p)}>
+                                        <button disabled={p.status === 'Confirmed'} className="disabled:cursor-not-allowed" onClick={() => changeStatus(p)}>
                                             <FaCheck className="text-green-400 text-2xl hover:border " />
                                         </button>
                                         <button
@@ -114,7 +112,6 @@ const AllRegisteredCamps = () => {
                                             <FaTimes
                                                 className="text-red-500 text-2xl hover:border" /></button>
                                     </div>
-
                                 </td>
                             </tr>
                         ))}
