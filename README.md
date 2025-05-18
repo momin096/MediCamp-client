@@ -4,7 +4,7 @@
 
 ## 👤 Organizer Credentials
 
-- **Username (Email):** organizer1@example.com  
+- **Username (Email):** medi@camp.com
 - **Password:** 123456
 
 > *(Use these credentials to log in as an Organizer and explore the dashboard.)*
