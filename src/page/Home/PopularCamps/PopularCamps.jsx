@@ -14,9 +14,11 @@ const PopularCamps = () => {
         }
     })
 
-    console.log(populars);
     return (
         <div className="container mx-auto p-5">
+            <div>
+                <h2 className="text-5xl font-semibold text-center py-10 ">Our Popular Camps</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10">
                 {
                     populars.map((camp) => (

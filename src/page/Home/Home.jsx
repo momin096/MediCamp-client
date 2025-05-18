@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet";
 import Slider from "./Slider/Slider";
 import PopularCamps from "./PopularCamps/PopularCamps";
+import WhyChoose from "./WhyChoose/WhyChoose";
+import HowItWorks from "./HowItWorks/HowItWorks";
 
 const Home = () => {
     return (
@@ -10,6 +12,8 @@ const Home = () => {
             </Helmet>
             <Slider />
             <PopularCamps />
+            <WhyChoose />
+            
         </div>
     );
 };
