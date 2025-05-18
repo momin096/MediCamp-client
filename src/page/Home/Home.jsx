@@ -13,7 +13,7 @@ const Home = () => {
             <Slider />
             <PopularCamps />
             <WhyChoose />
-            
+            <HowItWorks />
         </div>
     );
 };
