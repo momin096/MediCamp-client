@@ -57,11 +57,12 @@ const MyRegisteredCamp = () => {
     };
 
     const handleAddPaymentInfo = async (txid) => {
-        const { data } = await axiosSecure.post('/payments', {
+        const { data } = await axiosSecure.post(`/payments?email=${user?.email}`, {
             name: selectedCamp?.participantName,
             email: selectedCamp?.participantEmail,
             transactionId: txid,
-            price: selectedCamp?.campFees,
+            payment: 'Paid',
+            campId: selectedCamp?._id,
         })
         if (data.insertedId) {
             toast.success('Payment info Updated')
