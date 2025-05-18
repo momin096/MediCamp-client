@@ -35,6 +35,4 @@
 - **Authentication:** JWT
 - **Payments:** Stripe
 
----
 
-Let me know if you want a version for participants, doctors, or admins as well!
