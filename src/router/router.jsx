@@ -16,12 +16,14 @@ import AllRegisteredCamps from "../page/Dashboard/AllRegisteredCamps/AllRegister
 import PaymentHistory from "../page/Dashboard/PaymentHistory/PaymentHistory";
 import OrganizerRoute from "./OrganizerRoute";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../page/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -48,6 +50,7 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <Dashboard />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: 'add-camp',
