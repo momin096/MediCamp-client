@@ -31,7 +31,6 @@ const Login = () => {
                 navigate(from, { replace: true })
             }
         } catch (err) {
-            console.log(err);
             setLoading(false)
             toast.error(err)
         }
@@ -57,7 +56,6 @@ const Login = () => {
                 navigate('/')
             }
         } catch (err) {
-            console.log(err)
             toast.error(err?.message)
         }
     }

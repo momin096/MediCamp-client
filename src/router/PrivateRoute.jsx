@@ -4,7 +4,6 @@ import Loading from '../components/Loading/Loading'
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth()
-    console.log('user', user);
 
     if (loading && !user) return <Loading />
 

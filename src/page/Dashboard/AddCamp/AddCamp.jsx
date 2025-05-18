@@ -27,7 +27,6 @@ const AddCamp = () => {
 
         try {
             const image = await imageUpload(imageFile)
-            // console.log(image);
             if (image) {
                 const campDetails = {
                     campName,
@@ -41,7 +40,6 @@ const AddCamp = () => {
                 }
 
                 const { data } = await axiosSecure.post('/camps', campDetails)
-                console.log(data);
                 if (data.insertedId) {
                     toast.success('Camp Added!!')
                     reset()
@@ -51,13 +49,6 @@ const AddCamp = () => {
         } catch (err) {
             console.log(err);
         }
-
-
-
-
-
-        // reset();
-        // setImagePreview(null);
     };
 
     return (

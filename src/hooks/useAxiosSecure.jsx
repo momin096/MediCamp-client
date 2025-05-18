@@ -5,7 +5,6 @@ import useAuth from './useAuth'
 
 export const axiosSecure = axios.create({
     baseURL: 'https://medi-camp-server-ten.vercel.app',
-    withCredentials: true,
 })
 
 const useAxiosSecure = () => {
@@ -13,24 +12,35 @@ const useAxiosSecure = () => {
     const { logOut } = useAuth()
 
     useEffect(() => {
-        const interceptor = axiosSecure.interceptors.response.use(
-            res => res,
-            async error => {
-                console.log('Error caught from axios interceptor-->', error.response)
-                if (error.response?.status === 401 || error.response?.status === 403) {
-                    await logOut()
-                    navigate('/login')
+        const requestInterceptor = axiosSecure.interceptors.request.use(
+            (config) => {
+                const token = localStorage.getItem('access-token');
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
                 }
-                return Promise.reject(error)
+                return config;
+            },
+            (error) => Promise.reject(error)
+        );
+
+        const responseInterceptor = axiosSecure.interceptors.response.use(
+            res => res,
+            async (error) => {
+                if (error.response?.status === 401 || error.response?.status === 403) {
+                    await logOut();
+                    navigate('/login');
+                }
+                return Promise.reject(error);
             }
-        )
+        );
 
         return () => {
-            axiosSecure.interceptors.response.eject(interceptor)
-        }
-    }, [logOut, navigate])
+            axiosSecure.interceptors.request.eject(requestInterceptor);
+            axiosSecure.interceptors.response.eject(responseInterceptor);
+        };
+    }, [logOut, navigate]);
 
-    return axiosSecure
+    return axiosSecure;
 }
 
-export default useAxiosSecure
+export default useAxiosSecure;

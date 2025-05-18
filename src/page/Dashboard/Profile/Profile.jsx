@@ -2,19 +2,24 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import Loading from "../../../components/Loading/Loading";
 
 const Profile = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { data: userData } = useQuery({
+    const { data: userData, isLoading } = useQuery({
         queryKey: ['user', user?.email],
+        enabled: !!user?.email, // ✅ Prevent query if email is not ready
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/profile/${user?.email}`)
-            return data
+            const { data } = await axiosSecure.get(`/profile/${user.email}`);
+            return data;
         }
-    })
+    });
 
     const { name, image, email, role, _id } = userData || {}
+
+
+    if (isLoading) return <Loading />
 
 
     return (

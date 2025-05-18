@@ -8,7 +8,6 @@ import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
 const [role, isLoading] = useRole()
-    console.log('role', role);
     if (isLoading) return <Loading />
 
     return (

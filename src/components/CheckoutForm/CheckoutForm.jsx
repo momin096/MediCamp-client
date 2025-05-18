@@ -18,9 +18,6 @@ const CheckoutForm = ({ handlePayNow, setIsOpen, handleAddPaymentInfo, camp }) =
         }
     }, [camp]);
 
-    console.log('price,', camp);
-
-    console.log('stripe ->', stripe, 'secred', clientSecret);
 
     const createPaymentIntent = async () => {
         try {
@@ -61,7 +58,6 @@ const CheckoutForm = ({ handlePayNow, setIsOpen, handleAddPaymentInfo, camp }) =
                 },
             },
         });
-        console.log(paymentIntent);
 
         if (confirmError) {
             setPaymentError(confirmError.message);

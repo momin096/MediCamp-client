@@ -44,30 +44,27 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log("Current User -->", currentUser?.email);
             setUser(currentUser);
-            setLoading(false)
-            // if (currentUser) {
-            //     // get token and store in local storage
-            //     axiosPublic.post('/jwt', { email: currentUser?.email })
-            //         .then(res => {
-            //             console.log('token -> ', res.data.token);
-            //             if (res.data.token) {
-            //                 localStorage.setItem('access-token', res.data.token);
-            //                 setLoading(false);
-            //             }
-            //         })
-            //         .catch(error => {
-            //             console.error('Error fetching token:', error);
-            //         });
+            if (currentUser) {
+                // get token and store in local storage
+                axiosPublic.post('/jwt', { email: currentUser?.email })
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoading(false);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching token:', error);
+                    });
 
-               
 
-            // } else {
-            //     // remove token from local storage
-            //     localStorage.removeItem('access-token');
-            //     setLoading(false);
-            // }
+
+            } else {
+                // remove token from local storage
+                localStorage.removeItem('access-token');
+                setLoading(false);
+            }
         });
 
         return () => unsubscribe();

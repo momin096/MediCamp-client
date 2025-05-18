@@ -14,8 +14,6 @@ const Navbar = () => {
         <>
             <li><NavLink to="/" className="font-medium" end>Home</NavLink></li>
             <li><NavLink to="/available-camp" className="font-medium">Available Camps</NavLink></li>
-            <li><NavLink to="/about" className="font-medium">About</NavLink></li>
-            <li><NavLink to="/contact" className="font-medium">Contact</NavLink></li>
         </>
     );
 
@@ -30,7 +28,7 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {navLinks}
-                        
+
                     </ul>
                 </div>
                 <Link to="/" className="text-xl text-green-600 font-bold flex items-center gap-2">
