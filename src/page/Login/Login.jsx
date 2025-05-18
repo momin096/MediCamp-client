@@ -19,6 +19,7 @@ const Login = () => {
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
+    const from = location?.state?.from?.pathname || '/'
 
     const onSubmit = async (data) => {
         const { email, password } = data || {}
@@ -27,7 +28,7 @@ const Login = () => {
             const data = await signIn(email, password)
             if (data?.user) {
                 toast.success('Log In Successful!!')
-                navigate('/')
+                navigate(from, { replace: true })
             }
         } catch (err) {
             console.log(err);

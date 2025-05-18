@@ -14,6 +14,8 @@ import CampDetails from "../page/CampDetails/CampDetails";
 import MyRegisteredCamp from "../page/Dashboard/MyRegisteredCamp/MyRegisteredCamp";
 import AllRegisteredCamps from "../page/Dashboard/AllRegisteredCamps/AllRegisteredCamps";
 import PaymentHistory from "../page/Dashboard/PaymentHistory/PaymentHistory";
+import OrganizerRoute from "./OrganizerRoute";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -49,38 +51,54 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'add-camp',
-                element: <AddCamp />
+                element: <OrganizerRoute>
+                    <AddCamp />
+                </OrganizerRoute>
             },
             {
                 path: 'manage-camps',
-                element: <ManageCamp />
+                element: <OrganizerRoute>
+                    <ManageCamp />
+                </OrganizerRoute>
             },
             {
                 path: 'update-camp/:id',
-                element: <UpdateCamp />
+                element: <OrganizerRoute>
+                    <UpdateCamp />
+                </OrganizerRoute>
             },
             {
                 path: 'profile',
-                element: <Profile />
+                element: <PrivateRoute>
+                    <Profile />
+                </PrivateRoute>
             },
 
             {
                 path: 'update-profile/:email',
-                element: <UpdateProfile />
+                element: <PrivateRoute>
+                    <UpdateProfile />
+                </PrivateRoute>
             },
             {
                 path: 'registered-camps',
-                element: <AllRegisteredCamps />
+                element: <OrganizerRoute>
+                    <AllRegisteredCamps />
+                </OrganizerRoute>
 
             },
             {
                 path: 'my-registered-camps',
-                element: <MyRegisteredCamp />
+                element: <PrivateRoute>
+                    <MyRegisteredCamp />
+                </PrivateRoute>
 
             },
             {
                 path: 'payment-history',
-                element: <PaymentHistory />
+                element: <PrivateRoute>
+                    <PaymentHistory />
+                </PrivateRoute>
 
             },
         ]

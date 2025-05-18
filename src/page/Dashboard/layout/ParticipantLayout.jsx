@@ -25,7 +25,7 @@ const ParticipantLayout = () => {
                             : "px-3 py-2"
                     }
                 >
-                    <FaUser className="inline-block mr-2" /> Participant Profile
+                    <FaUser className="inline-block mr-2" />Profile
                 </NavLink>
             </li>
             <li>

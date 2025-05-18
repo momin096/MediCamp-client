@@ -57,7 +57,7 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-48 ">
                             <li className="text-green-600 font-semibold cursor-default ml-2">{user.displayName}</li>
-                            <li><Link className="py-2" to="/dashboard/add-camp">Dashboard</Link></li>
+                            <li><Link className="py-2" to="/dashboard/profile">Dashboard</Link></li>
                             <li><button className="py-2" onClick={handleLogout}>Logout</button></li>
                         </ul>
                     </div>
