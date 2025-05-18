@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utlities";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../components/Loading/Loading";
 
@@ -12,6 +12,7 @@ const UpdateCamp = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const axiosSecure = useAxiosSecure();
     const { id } = useParams();
+    const navigate = useNavigate()
 
     const imageFile = watch("image");
 
@@ -72,6 +73,7 @@ const UpdateCamp = () => {
             const res = await axiosSecure.patch(`/camps/${camp._id}`, updatedCamp);
             if (res.data.modifiedCount > 0) {
                 toast.success('Camp updated successfully!');
+                navigate('/dashboard/manage-camps')
             } else {
                 toast.error('No changes were made.');
             }

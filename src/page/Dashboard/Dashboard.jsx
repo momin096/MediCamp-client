@@ -1,13 +1,15 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { FaHome, FaCampground, FaChartBar, FaUser, FaClipboardList, FaCreditCard } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
-import useRole from "../../hooks/useRole";
 import ParticipantLayout from "./layout/ParticipantLayout";
 import OrganizerLayout from "./layout/OrganizerLayout";
+import Loading from "../../components/Loading/Loading";
+import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
-    const [role, isLoading] = useRole()
+const [role, isLoading] = useRole()
+    console.log('role', role);
+    if (isLoading) return <Loading />
 
     return (
         <div>
@@ -41,8 +43,7 @@ const Dashboard = () => {
                             role === 'Participant' && <ParticipantLayout />
                         }
 
-                        {/* Divider */}
-                        
+
                         {/* Organizer links */}
                         {
                             role === 'Organizer' && <OrganizerLayout />

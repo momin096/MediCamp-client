@@ -3,10 +3,14 @@ import Slider from "./Slider/Slider";
 import PopularCamps from "./PopularCamps/PopularCamps";
 import WhyChoose from "./WhyChoose/WhyChoose";
 import HowItWorks from "./HowItWorks/HowItWorks";
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
+    const { user } = useAuth()
+    console.log('user', user);
     return (
-        <div className="pb-[2000px]">
+
+        <div >
             <Helmet>
                 <title>Home | MediCamp</title>
             </Helmet>
