@@ -2,9 +2,13 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { FaHome, FaCampground, FaChartBar, FaUser, FaClipboardList, FaCreditCard } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
+import ParticipantLayout from "./layout/ParticipantLayout";
+import OrganizerLayout from "./layout/OrganizerLayout";
 
 const Dashboard = () => {
-    const { user } = useAuth()
+    const [role, isLoading] = useRole()
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -32,106 +36,17 @@ const Dashboard = () => {
                             <img className="h-8 w-8" src="/Logo.png" alt="" />
                             MediCamp</Link>
 
-                        <li>
-                            <NavLink
-                                to="/dashboard/analytics"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaChartBar className="inline-block mr-2" /> Analytics
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/profile"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaUser className="inline-block mr-2" /> Participant Profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to={`/dashboard/my-registered-camps`}
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaClipboardList className="inline-block mr-2" /> Registered Camps
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/payment-history"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaCreditCard className="inline-block mr-2" /> Payment History
-                            </NavLink>
-                        </li>
+                        {/* user links */}
+                        {
+                            role === 'Participant' && <ParticipantLayout />
+                        }
 
                         {/* Divider */}
-                        <div className="my-4 border-t border-[#1F1F1F]/30"></div>
-                        <li>
-                            <NavLink
-                                to="/dashboard/profile"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaUser className="inline-block mr-2" /> Profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/add-camp"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaCreditCard className="inline-block mr-2" /> Add Camp
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/manage-camps"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaCreditCard className="inline-block mr-2" /> Manage Camp
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/registered-camps"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "bg-[#8B322C] text-white rounded-lg px-3 py-2"
-                                        : "px-3 py-2"
-                                }
-                            >
-                                <FaCreditCard className="inline-block mr-2" /> Manage Registered Camps
-
-                            </NavLink>
-                        </li>
+                        
+                        {/* Organizer links */}
+                        {
+                            role === 'Organizer' && <OrganizerLayout />
+                        }
                         <div className="my-4 border-t border-[#1F1F1F]/30"></div>
 
                         {/* Bottom Navigation */}
