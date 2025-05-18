@@ -17,6 +17,7 @@ import PaymentHistory from "../page/Dashboard/PaymentHistory/PaymentHistory";
 import OrganizerRoute from "./OrganizerRoute";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
+import Analytics from "../page/Dashboard/Analytics/Analytics";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
                 element: <OrganizerRoute>
                     <AddCamp />
                 </OrganizerRoute>
+            },
+            {
+                path: 'analytics',
+                element: <PrivateRoute>
+                    <Analytics />
+                </PrivateRoute>
             },
             {
                 path: 'manage-camps',

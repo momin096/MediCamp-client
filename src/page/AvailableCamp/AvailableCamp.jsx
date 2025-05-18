@@ -1,10 +1,19 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaCalendarAlt, FaClock, FaUserMd, FaUsers, FaThLarge, FaTh } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUserMd,
+  FaUsers,
+  FaThLarge,
+  FaTh,
+} from "react-icons/fa";
 import { HiOutlineMapPin } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../components/Loading/Loading";
+
+const ITEMS_PER_PAGE = 6;
 
 const AvailableCamp = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,12 +26,11 @@ const AvailableCamp = () => {
     },
   });
 
-  // State for search, sort, and layout
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [isThreeColumn, setIsThreeColumn] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter camps based on search term (case insensitive)
   const filteredCamps = useMemo(() => {
     return camps.filter((camp) => {
       const searchStr = searchTerm.toLowerCase();
@@ -35,7 +43,6 @@ const AvailableCamp = () => {
     });
   }, [camps, searchTerm]);
 
-  // Sort filtered camps based on selected option
   const sortedCamps = useMemo(() => {
     let sorted = [...filteredCamps];
 
@@ -47,10 +54,20 @@ const AvailableCamp = () => {
       sorted.sort((a, b) => a.campName.localeCompare(b.campName));
     }
 
-    return sorted;
+    return sorted.reverse();
   }, [filteredCamps, sortOption]);
 
-  if (isLoading) return <Loading />
+  const totalPages = Math.ceil(sortedCamps.length / ITEMS_PER_PAGE);
+  const paginatedCamps = sortedCamps.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  useMemo(() => {
+    setCurrentPage(1);
+  }, [searchTerm, sortOption]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-yellow-100 p-6">
@@ -58,7 +75,6 @@ const AvailableCamp = () => {
         Explore Available Medical Camps
       </h2>
 
-      {/* Search and Sort Controls */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4 max-w-5xl mx-auto">
         <input
           type="text"
@@ -79,7 +95,6 @@ const AvailableCamp = () => {
           <option value="alphabetical">Alphabetical (Camp Name)</option>
         </select>
 
-        {/* Layout toggle button */}
         <button
           className="btn btn-outline btn-primary flex items-center gap-2"
           onClick={() => setIsThreeColumn((prev) => !prev)}
@@ -98,18 +113,18 @@ const AvailableCamp = () => {
         </button>
       </div>
 
-      {/* Camps Grid */}
       <div
-        className={`grid gap-8 max-w-7xl mx-auto ${
-          isThreeColumn ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2"
-        }`}
+        className={`grid gap-8 max-w-7xl mx-auto ${isThreeColumn
+          ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          : "grid-cols-1 md:grid-cols-2"
+          }`}
       >
-        {sortedCamps.length === 0 ? (
+        {paginatedCamps.length === 0 ? (
           <p className="text-center col-span-full text-gray-700 text-xl">
             No camps found matching your criteria.
           </p>
         ) : (
-          [...sortedCamps].reverse().map((camp) => (
+          paginatedCamps.map((camp) => (
             <div
               key={camp._id}
               className="card bg-white shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-2xl overflow-hidden"
@@ -122,7 +137,9 @@ const AvailableCamp = () => {
                 />
               </figure>
               <div className="card-body space-y-2">
-                <h3 className="text-2xl font-semibold text-primary">{camp.campName}</h3>
+                <h3 className="text-2xl font-semibold text-primary">
+                  {camp.campName}
+                </h3>
 
                 <div className="flex items-center gap-2 text-gray-600">
                   <FaCalendarAlt />
@@ -160,6 +177,24 @@ const AvailableCamp = () => {
           ))
         )}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-10">
+          <div className="join">
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                className={`join-item btn ${currentPage === index + 1 ? "btn-primary" : "btn-outline"
+                  }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
